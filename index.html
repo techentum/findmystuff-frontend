@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FindMyStuff Dashboard</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">FindMyStuff</p>
+          <h1>Bin &amp; Item Tracker</h1>
+          <p class="subtitle">
+            Track storage bins, tag items, and search instantly. Connects to the Flask
+            API running on <strong>http://localhost:5000</strong>.
+          </p>
+        </div>
+        <div class="status-card">
+          <p class="status-label">API Status</p>
+          <div class="status-indicator" id="api-status">
+            <span class="dot" aria-hidden="true"></span>
+            <span id="api-status-text">Checking...</span>
+          </div>
+          <button class="ghost" id="refresh-status">Refresh</button>
+        </div>
+      </header>
+
+      <main class="grid">
+        <section class="panel">
+          <header class="panel-header">
+            <div>
+              <h2>Bins</h2>
+              <p>Organize storage locations and keep their tags searchable.</p>
+            </div>
+            <div class="filter">
+              <label for="bin-filter">Filter by tag</label>
+              <input id="bin-filter" type="text" placeholder="tools, garage" />
+            </div>
+          </header>
+
+          <div class="list" id="bins-list"></div>
+
+          <form class="form" id="bin-form">
+            <h3>Create bin</h3>
+            <div class="form-row">
+              <label for="bin-id">Bin ID (4 digits)</label>
+              <input id="bin-id" name="id" maxlength="4" placeholder="1234" required />
+            </div>
+            <div class="form-row">
+              <label for="bin-location">Location</label>
+              <input id="bin-location" name="location" placeholder="Garage shelf" required />
+            </div>
+            <div class="form-row">
+              <label for="bin-tags">Tags (comma separated)</label>
+              <input id="bin-tags" name="tags" placeholder="tools, heavy" />
+            </div>
+            <button type="submit">Add bin</button>
+            <p class="form-message" id="bin-message"></p>
+          </form>
+        </section>
+
+        <section class="panel">
+          <header class="panel-header">
+            <div>
+              <h2>Items</h2>
+              <p>Search all items or add new ones directly to a bin.</p>
+            </div>
+            <div class="filter">
+              <label for="item-filter">Filter by tag</label>
+              <input id="item-filter" type="text" placeholder="metal, fragile" />
+            </div>
+          </header>
+
+          <div class="list" id="items-list"></div>
+
+          <form class="form" id="item-form">
+            <h3>Create item</h3>
+            <div class="form-row">
+              <label for="item-id">Item ID</label>
+              <input id="item-id" name="id" placeholder="hammer" required />
+            </div>
+            <div class="form-row">
+              <label for="item-name">Name</label>
+              <input id="item-name" name="name" placeholder="Claw Hammer" required />
+            </div>
+            <div class="form-row">
+              <label for="item-bin">Bin ID</label>
+              <input id="item-bin" name="bin_id" placeholder="1234" required />
+            </div>
+            <div class="form-row">
+              <label for="item-tags">Tags (comma separated)</label>
+              <input id="item-tags" name="tags" placeholder="tools, metal" />
+            </div>
+            <button type="submit">Add item</button>
+            <p class="form-message" id="item-message"></p>
+          </form>
+        </section>
+      </main>
+    </div>
+
+    <footer class="footer">
+      <p>
+        Tips: Bin IDs must be 4-digit strings. Delete or move items before deleting a
+        bin.
+      </p>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
